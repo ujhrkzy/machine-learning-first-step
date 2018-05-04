@@ -1,0 +1,15 @@
+*.pyc
+*.pyo
+__pycache__/
+.python-version
+.idea/dictionaries
+.idea/misc.xml
+.idea/modules.xml
+.idea/ml-1st-step-master.iml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.cache
+.eggs
+UNKNOWN.egg-info
+*.h5

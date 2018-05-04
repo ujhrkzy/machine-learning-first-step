@@ -1,0 +1,2 @@
+model_checkpoint_path: "liner_regression_tf_dense.ckpt-1500"
+all_model_checkpoint_paths: "liner_regression_tf_dense.ckpt-1500"
