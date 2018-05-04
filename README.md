@@ -29,7 +29,7 @@ echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
 echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
 source ~/.bash_profile
 
-#> create virtual python environment
+# <create virtual python environment>
 cd ${作業用フォルダ}
 pyenv install --list
 pyenv install -v ${python version}
@@ -42,18 +42,18 @@ pyenv local ml-1st-step-${python version}
 # アンインストールするときは下記コマンドを実行する。
 # pyenv uninstall ${name}
 
-#> install python library
+# <install python library>
 pip install --upgrade pip
 pip install pip-tools
 pip3 install -r requirements.txt
 
 
-#> edit matplotlibrc
+# <edit matplotlibrc>
 # matplotlibrcファイルの場所の確認
 python -c "import matplotlib;print(matplotlib.matplotlib_fname())"
 # 「backend : macosx」を「backend : Tkagg」に変更する
 
-#> edit pycharm settings
+# <edit pycharm settings>
 # pycharmを開く（作業用フォルダを指定する）
 
 # Preference -> Project -> Project Interpreter -> Add local 画面を開く
@@ -62,6 +62,5 @@ python -c "import matplotlib;print(matplotlib.matplotlib_fname())"
 
 # Preference -> Project -> Project Structure 画面を開く
 # cnn, dnn, linear_regression, logistic_regressionフォルダを「Source」フォルダに指定する
-
 
 ```
