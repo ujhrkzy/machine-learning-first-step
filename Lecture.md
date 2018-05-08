@@ -4,7 +4,7 @@ https://www.coursera.org/learn/machine-learning<br>
 
 #### lecture2
 - 10, 15ページ cost function(損失関数)
-- 34, 35 勾配計算方法
+- 35, 36 勾配計算方法
 
 #### lecture4
 - 15 featrue scaling
