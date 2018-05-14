@@ -9,6 +9,7 @@ from sklearn import preprocessing
 from tensorflow.contrib.keras.api.keras import optimizers
 from tensorflow.contrib.keras.api.keras.layers import Dense
 from tensorflow.contrib.keras.api.keras.models import Sequential
+from tensorflow.contrib.keras.api.keras.models import load_model
 
 __author__ = "ujihirokazuya"
 
@@ -34,7 +35,7 @@ class LogisticRegressionTrainer(object):
 
         # train
         model.fit(train_X_data, train_y_data, epochs=self._epoch_size, batch_size=100)
-        model.save("result/liner_regression_keras" + ".h5")
+        model.save("result/logistic_regression_keras.h5")
 
         # check model
         def predict(x):
@@ -43,6 +44,18 @@ class LogisticRegressionTrainer(object):
             result = predictions == y_data
             return result
         self._visualize(predict, train_X_data, "result/logistic_regression_keras.png")
+
+    def validate_with_keras(self):
+        train_X_data, train_y_data = self._load_data()
+        train_X_data = preprocessing.scale(train_X_data)
+        model = load_model("result/logistic_regression_keras.h5")
+
+        def predict(x):
+            predictions = (model.predict(x) >= 0.5).astype(np.int32)
+            y_data = train_y_data.astype(np.int32).tolist()
+            result = predictions == y_data
+            return result
+        self._visualize(predict, train_X_data, "result/logistic_regression_keras_val.png")
 
     def train_with_tf(self):
         # create calculation graph(build model)
@@ -129,6 +142,31 @@ class LogisticRegressionTrainer(object):
                 return sess.run(correct, feed_dict={X_data: x, y_data: train_y_data})
             self._visualize(predict, train_X_data, "result/logistic_regression_tf_dense.png")
 
+    def validate_with_tf_dense(self):
+        # create calculation graph(build model)
+        X_data = tf.placeholder(shape=[None, 2], dtype=tf.float32)
+        y_data = tf.placeholder(shape=[None, 1], dtype=tf.float32)
+        # Hypothesis
+        y = tf.layers.dense(X_data, units=1)
+
+        # define accuracy
+        prediction = tf.round(tf.sigmoid(y))
+        correct = tf.cast(tf.equal(prediction, y_data), dtype=tf.float32)
+
+        # load data
+        train_X_data, train_y_data = self._load_data()
+        train_X_data = preprocessing.scale(train_X_data)
+
+        # train
+        with tf.Session() as sess:
+            saver = tf.train.Saver()
+            saver.restore(sess, "result/logistic_regression_tf_dense.ckpt-1500")
+
+            # check model
+            def predict(x):
+                return sess.run(correct, feed_dict={X_data: x, y_data: train_y_data})
+            self._visualize(predict, train_X_data, "result/logistic_regression_tf_dense_val.png")
+
     def _load_data(self):
         data = np.genfromtxt(self._load_data_path, delimiter=',')
         X = data[:, (0, 1)]
@@ -166,3 +204,5 @@ if __name__ == '__main__':
     trainer.train_with_tf()
     trainer.train_with_tf_dense()
     trainer.train_with_keras()
+    trainer.validate_with_keras()
+    trainer.validate_with_tf_dense()
