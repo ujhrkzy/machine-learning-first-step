@@ -40,7 +40,7 @@ pyenv versions
 pyenv virtualenv ${python version} openpose-${python version}
 # e.g. pyenv virtualenv 3.6.0 openpose-3.6.0
 pyenv local openpose-${python version}
-# e.g. pyenv local openpose--3.6.0
+# e.g. pyenv local openpose-3.6.0
 # アンインストールするときは下記コマンドを実行する。
 # pyenv uninstall ${name}
 
