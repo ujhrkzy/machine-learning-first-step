@@ -28,6 +28,7 @@ echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
 echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
 source ~/.bash_profile
+brew install pyenv-virtualenv
 
 # <create virtual python environment>
 cd ${作業用フォルダ}
