@@ -11,8 +11,6 @@
 <a href="#mac precondition"></a>  
 
 #### 前提<br>
-* brewインストール済み
-* pycharmインストール済み
 * python version: 3.6.0
 * https://github.com/ujhrkzy/machine-learning-first-step 直下のファイルを作業用フォルダに配置済み
 
@@ -22,6 +20,18 @@
 #### 手順
 
 ```sh
+# install brew
+# see https://brew.sh/index_ja
+
+# install pycharm
+# ※ professionalではなく、community(無料)版
+# https://www.jetbrains.com/pycharm/download/#section=mac
+
+# install opencv(optional)
+brew tap homebrew/science
+brew install opencv3 --with-python3　--without-python
+brew link opencv3 --force
+
 #> install pyenv
 brew install pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
